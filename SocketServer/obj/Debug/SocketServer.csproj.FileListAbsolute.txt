@@ -1,0 +1,6 @@
+/Users/kamron/Projects/SocketServer/SocketServer/bin/Debug/SocketServer.exe
+/Users/kamron/Projects/SocketServer/SocketServer/bin/Debug/SocketServer.pdb
+/Users/kamron/Projects/SocketServer/SocketServer/obj/Debug/SocketServer.csproj.AssemblyReference.cache
+/Users/kamron/Projects/SocketServer/SocketServer/obj/Debug/SocketServer.csproj.CoreCompileInputs.cache
+/Users/kamron/Projects/SocketServer/SocketServer/obj/Debug/SocketServer.exe
+/Users/kamron/Projects/SocketServer/SocketServer/obj/Debug/SocketServer.pdb
