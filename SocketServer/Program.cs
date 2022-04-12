@@ -41,13 +41,19 @@ namespace SocketServer
                     string resultText = default;
 
                     data += Encoding.UTF8.GetString(bytes, 0, bytesRec);
+                    Console.WriteLine(data);
+                    if (data.Contains("none"))
+                    {
+                        string reply = "HTTP/1.1 200 Ok\r\nDate: Sun, 07 Jul 2013 17:13:10 GMT\r\nServer: Apache/2.4.4 (Win32) OpenSSL/0.9.8y PHP/5.4.16\r\nLast-Modified: Sat, 30 Mar 2013 11:28:59 GMT\r\nETag: \"ca-4d922b19fd4c0\"\r\nAccept-Ranges: bytes\r\nContent-Length: 202\r\nKeep-Alive: timeout=5, max=100\r\nConnection: Keep-Alive\r\nContent-Type: text/html\r\n\r\n" +
+                "hello ";
+                        byte[] msg = Encoding.UTF8.GetBytes(reply);
+                        handler.Send(msg);
+                    }
 
                     var request = data.Split(' ');
 
                     // Показываем данные на консоли
                     Console.Write("Полученное имя файла: " + request[5] + "\n\n");
-
-                    Console.WriteLine(request[6]);
 
                     if (request[0] == "GET")
                     {
@@ -88,15 +94,17 @@ namespace SocketServer
                     }
 
                     // Отправляем ответ клиенту\
-                    if (resultText == "Error")
+                    if (resultText == "Error" )
                     {
-                        string reply = CreateHTTPResponce("400 Error", "Not Found");
+                        string reply  = "HTTP/1.1 400 Not Found\r\nDate: Sun, 07 Jul 2013 17:13:10 GMT\r\nServer: Apache/2.4.4 (Win32) OpenSSL/0.9.8y PHP/5.4.16\r\nLast-Modified: Sat, 30 Mar 2013 11:28:59 GMT\r\nETag: \"ca-4d922b19fd4c0\"\r\nAccept-Ranges: bytes\r\nContent-Length: 202\r\nKeep-Alive: timeout=5, max=100\r\nConnection: Keep-Alive\r\nContent-Type: text/html\r\n\r\n" +
+                "<html>";
                         byte[] msg = Encoding.UTF8.GetBytes(reply);
                         handler.Send(msg);
                     }
                     else
                     {
-                        string reply = CreateHTTPResponce("200 OK", resultText);
+                        string reply = "HTTP/1.1 200 OK\r\nDate: Sun, 07 Jul 2013 17:13:10 GMT\r\nServer: Apache/2.4.4 (Win32) OpenSSL/0.9.8y PHP/5.4.16\r\nLast-Modified: Sat, 30 Mar 2013 11:28:59 GMT\r\nETag: \"ca-4d922b19fd4c0\"\r\nAccept-Ranges: bytes\r\nContent-Length: 202\r\nKeep-Alive: timeout=5, max=100\r\nConnection: Keep-Alive\r\nContent-Type: text/html\r\n\r\n" +
+                resultText;
                         byte[] msg = Encoding.UTF8.GetBytes(reply);
                         handler.Send(msg);
                     }
@@ -126,7 +134,8 @@ namespace SocketServer
             string responce;
             var requestLine = $"HTTP/1.1 " + status;
 
-            responce = "\n" + requestLine + "\n" + "Date: " + DateTime.UtcNow + "\n" + "Server: localhost" + "\n" + "Content-Type: text/html" + "\n\n" + body;
+            responce = "HTTP/1.1 200 OK\r\nDate: Sun, 07 Jul 2013 17:13:10 GMT\r\nServer: Apache/2.4.4 (Win32) OpenSSL/0.9.8y PHP/5.4.16\r\nLast-Modified: Sat, 30 Mar 2013 11:28:59 GMT\r\nETag: \"ca-4d922b19fd4c0\"\r\nAccept-Ranges: bytes\r\nContent-Length: 202\r\nKeep-Alive: timeout=5, max=100\r\nConnection: Keep-Alive\r\nContent-Type: text/html\r\n\r\n" +
+                "< html >";
 
             return responce;
         }
